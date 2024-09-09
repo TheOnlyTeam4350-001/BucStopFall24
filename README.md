@@ -1,3 +1,7 @@
+#Noah
+Brandon Riddle
+# Ethan Frazier
+
 # BucStop
 ### A Team [Redacted] Project
 ### Members:
@@ -56,3 +60,5 @@ For more documentation on how to run locally and how to set up deployments, see 
 * [Team Redacted Video Playlist](https://youtube.com/playlist?list=PLxsGO-QGipWmVzxFkVbA-o6BUW5eRdk3H&si=a7jHaNBgdTtXgoJ4)
 * [Running Locally](https://docs.google.com/document/d/1gfUpjZNfqWyv1ohUW1IaS8fOhXp0hOx6tFQVXBADa8Q/edit?usp=sharing)
 * [How to Deploy](https://docs.google.com/document/d/1VElVP9HrOafxdM0HfD9jjM8HvnzBSpXhhq1O9VtTTug/edit?usp=sharing)
+
+
