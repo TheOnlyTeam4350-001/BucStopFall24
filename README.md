@@ -3,6 +3,7 @@
 # Ethan Frazier
 # Timothy
 # Jaylen
+# Raseem
 # BucStop
 ### A Team [Redacted] Project
 ### Members:
