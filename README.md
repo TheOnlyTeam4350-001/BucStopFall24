@@ -1,6 +1,5 @@
-#Noah
-Brandon Riddle
-
+# Brandon Riddle
+# Noah
 # BucStop
 ### A Team [Redacted] Project
 ### Members:
