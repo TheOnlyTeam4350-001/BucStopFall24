@@ -1,6 +1,6 @@
 # Noah
 # Brandon Riddle
-# Ethan Frazier
+# Ethan Frazier.
 # Timothy
 # Jaylen
 # Raseem
