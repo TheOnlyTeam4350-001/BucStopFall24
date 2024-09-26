@@ -2,8 +2,7 @@
 # Brandon Riddle
 # Ethan
 # Timothy
-# Jaylen
-# Raseem
+# Logan
 # BucStop
 ### A Team [Redacted] Project
 ### Members:
@@ -12,7 +11,6 @@
 #### CSCI 4350
 #### Spring 2024, East Tennessee State University
 
-# Logan Rogers comment \o/
 ### Overview:
 This project is a game website made by and for ETSU students. It
 is a place to put games created by ETSU students.
