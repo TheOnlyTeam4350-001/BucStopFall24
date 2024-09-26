@@ -2,7 +2,6 @@
 # Brandon Riddle
 # Ethan Frazier
 # Timothy
-# Jaylen
 # Logan
 # BucStop
 ### A Team [Redacted] Project
