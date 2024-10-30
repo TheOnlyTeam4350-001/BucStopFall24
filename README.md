@@ -1,14 +1,12 @@
+# BucStop
+### A Team [Redacted] Project
+### Members:
 # Noah
 # Brandon Riddle
 # Ethan
 # Timothy
 # Logan
 # Jaylen
-# BucStop
-### A Team [Redacted] Project
-### Members:
-> Josh Rucevice, Bryson Brandon, Kurt Brewer, Patrick Vergason
-> Ethan Hensley, Charlie Shahan, Ethan Webb
 #### CSCI 4350
 #### Spring 2024, East Tennessee State University
 
