@@ -1,4 +1,8 @@
-﻿﻿@{
+﻿@using BucStop.Services;
+@using Microsoft.AspNetCore.Hosting
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -8,10 +12,9 @@
     foreach (var game in Model)
     {
         gamesList.Add(game);
-        //gamesList.Sort(gamesList.playcount);
-
     }
 }
+
 <div id="demo" class="carousel slide" data-bs-ride="carousel" style="margin-left: 100px; margin-right: 100px;">
 
     <!-- Indicators/dots -->

@@ -1,10 +1,14 @@
 using BucStop;
+using BucStop.Services;
 
 /*
  * This is the base program which starts the project.
  */
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Register VisitCountManager as a singleton
+builder.Services.AddSingleton<VisitCountManager>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -32,10 +36,12 @@ builder.Logging.AddSimpleConsole(options =>
 });
 
 
-
 builder.Services.AddSingleton<GameService>();
 
 var app = builder.Build();
+
+// Add BaseController to the request pipeline
+app.UseMiddleware<BaseController>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
