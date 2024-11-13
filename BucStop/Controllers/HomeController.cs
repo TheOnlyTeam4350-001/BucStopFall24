@@ -31,11 +31,6 @@ namespace BucStop.Controllers
         //Sends the user to the deprecated Index page.
         public IActionResult Index()
         {
-            // TESTING TESTING TESTING
-            // Increment the visit count when someone visits the home page / index page
-            //_visitCountManager.IncrementVisitCount();
-            // TESTING TESTING TESTING
-
             // Retrieve the updated visit count
             int currentVisitCount = _visitCountManager.GetVisitCounts();
 

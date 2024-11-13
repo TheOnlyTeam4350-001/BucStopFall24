@@ -3,8 +3,8 @@ using Microsoft.VisualBasic;
 using System.ComponentModel.DataAnnotations;
 
 /*
- * This file contains the Game class, which holds necessary information
- * about the games. Used in GamesController.cs, which has actual instances
+ * This file contains the VisitCount class, which holds necessary information
+ * about the games. Used in VisitCountController.cs, which has actual instances
  * of each game.
  */
 
