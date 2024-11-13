@@ -64,7 +64,7 @@
     <!-- This block handles the footer, which includes the version number for the project. -->
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; <script>document.write(new Date().getFullYear())</script> - BucStop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - <a href="https://github.com/Redacted-Team/4350_002_Fall23_BucStop/releases/tag/2.4" style="color:#C6AA76;">Version: 2.4.0</a><a> - </a>
+            &copy; <script>document.write(new Date().getFullYear())</script> - BucStop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - <a href="https://github.com/Redacted-Team/4350_002_Fall23_BucStop/releases/tag/2.4" style="color:#C6AA76;">Version: 2.4.0</a><a> - Current Visit Count: @(Context.Items["VisitCount"] ?? 0)</a>
 
         </div>
     </footer>
