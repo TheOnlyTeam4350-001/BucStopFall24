@@ -13,24 +13,27 @@ public class BaseController
         _visitCountManager = visitCountManager;
     }
 
-    //public async Task InvokeAsync(HttpContext context)
-    //{
-    //    // Increment visit count on each request and retrieve the updated count
-    //    int currentVisitCount = _visitCountManager.GetVisitCounts();
-
-    //    // Set the visit count in ViewData for use in _Layout.cshtml
-    //    context.Items["VisitCount"] = currentVisitCount;
-
-    //    await _next(context);
-    //}
-
     public async Task InvokeAsync(HttpContext context)
     {
-        int currentVisitCount = _visitCountManager.GetVisitCounts();
+        var path = context.Request.Path.ToString().ToLower();
 
-        // Set the visit count in ViewData for use in _Layout.cshtml
-        context.Items["VisitCount"] = currentVisitCount;
+        if (path == "/" || path == "/home/index")
+        {
+            // Increment the visit count when someone visits the page index
+            _visitCountManager.IncrementVisitCount();
+        }
+
+        // Retrieve the latest visit count after incremementing and set it in HttpContext.Items
+        context.Items["VisitCount"] = _visitCountManager.GetVisitCounts();
 
         await _next(context);
     }
+
+    //public async Task InvokeAsync(HttpContext context)
+    //{
+    //    // Set the visit count in ViewData for use in _Layout.cshtml
+    //    context.Items["VisitCount"] = _visitCountManager.GetVisitCounts();
+
+    //    await _next(context);
+    //}
 }
