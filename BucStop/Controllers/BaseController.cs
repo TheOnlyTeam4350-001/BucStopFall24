@@ -28,12 +28,4 @@ public class BaseController
 
         await _next(context);
     }
-
-    //public async Task InvokeAsync(HttpContext context)
-    //{
-    //    // Set the visit count in ViewData for use in _Layout.cshtml
-    //    context.Items["VisitCount"] = _visitCountManager.GetVisitCounts();
-
-    //    await _next(context);
-    //}
 }
