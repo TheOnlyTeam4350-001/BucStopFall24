@@ -363,5 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # This prevents merge conflicts and conflicting data.
-Bucstop/wwwroot/visitcount.json
-Bucstop/wwwroot/playcount.json
+# Bucstop/wwwroot/visitcount.json
+# Bucstop/wwwroot/playcount.json
