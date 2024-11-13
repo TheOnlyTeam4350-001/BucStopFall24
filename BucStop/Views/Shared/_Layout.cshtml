@@ -64,7 +64,7 @@
     <!-- This block handles the footer, which includes the version number for the project. -->
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; <script>document.write(new Date().getFullYear())</script> - BucStop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - <a href="https://github.com/chrisseals98/BOBBY/releases/tag/v2.0.0" style="color:#C6AA76;">Version: 2.0.0</a> - Current Visit Count: @ViewData["VisitCount"]
+            &copy; <script>document.write(new Date().getFullYear())</script> - BucStop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - <a href="https://github.com/chrisseals98/BOBBY/releases/tag/v2.0.0" style="color:#C6AA76;">Version: 2.0.0</a> - Current Visit Count: @(Context.Items["VisitCount"] ?? 0)
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -73,3 +73,6 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+            @* Current Visit Count: @ViewData["VisitCount"] *@
