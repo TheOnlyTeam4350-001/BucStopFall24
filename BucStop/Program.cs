@@ -1,10 +1,17 @@
 using BucStop;
+using BucStop.Services;
 
 /*
  * This is the base program which starts the project.
  */
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Register VisitCountService as a singleton
+builder.Services.AddSingleton<VisitCountService>();
+
+// Register VisitCountManager as a singleton
+builder.Services.AddSingleton<VisitCountManager>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -32,7 +39,6 @@ builder.Logging.AddSimpleConsole(options =>
 });
 
 
-
 builder.Services.AddSingleton<GameService>();
 
 var app = builder.Build();
@@ -44,6 +50,9 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+// Add BaseController to the request pipeline
+app.UseMiddleware<BaseController>();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
