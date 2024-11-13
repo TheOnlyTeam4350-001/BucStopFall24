@@ -8,7 +8,7 @@ using BucStop.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Register VisitCountService as a singleton
-builder.Services.AddSingleton<VisitCountService>();
+//builder.Services.AddSingleton<VisitCountService>();
 
 // Register VisitCountManager as a singleton
 builder.Services.AddSingleton<VisitCountManager>();
