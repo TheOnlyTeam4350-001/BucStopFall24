@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# This prevents merge conflicts and conflicting data.
+Bucstop/wwwroot/visitcount.json
+Bucstop/wwwroot/playcount.json
