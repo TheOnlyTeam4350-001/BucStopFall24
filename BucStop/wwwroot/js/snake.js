@@ -23,30 +23,30 @@ let isGameOver = false;
 
 // Structure for holding data for the snake
 var snake = {
-  x: 160,
-  y: 160,
+    x: 160,
+    y: 160,
 
-  // snake velocity. moves one grid length every frame in either the x or y direction
-  dx: grid,
-  dy: 0,
+    // snake velocity. moves one grid length every frame in either the x or y direction
+    dx: grid,
+    dy: 0,
 
-  // keep track of all grids the snake body occupies
-  cells: [],
+    // keep track of all grids the snake body occupies
+    cells: [],
 
-  // length of the snake. grows when eating an apple
-  maxCells: 4
+    // length of the snake. grows when eating an apple
+    maxCells: 4
 };
 
 // Structure for holding data for the current apple
 var apple = {
-  x: 320,
-  y: 320
+    x: 320,
+    y: 320
 };
 
 // get random whole numbers in a specific range
 // see https://stackoverflow.com/a/1527820/2124254
 function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function showStartScreen() {
@@ -54,7 +54,30 @@ function showStartScreen() {
     context.textAlign = 'center';
     context.fillText('Press space to start', canvas.width / 2, canvas.height / 2);
 }
+function showRestartScreen() {
+    context.font = '36px Arial';
+    context.textAlign = 'center';
+    context.fillText('Press E to restart', canvas.width / 2, canvas.height / 2);
 
+    snake.x = 160;
+    snake.y = 160;
+    snake.cells = [];
+    snake.maxCells = 4;
+    snake.dx = grid;
+    snake.dy = 0;
+    playerScore.textContent = `Current Score: ${0}`;
+    apple.x = getRandomInt(0, 25) * grid;
+    apple.y = getRandomInt(0, 25) * grid;
+
+    document.body.onkeyup = function (e) {
+        if (e.keyCode == 69) {
+            isGameOver = false;
+            loop()
+        }
+    }
+
+ 
+}
 // game loop
 function loop() {
 
@@ -137,58 +160,61 @@ function loop() {
                 // snake occupies same space as a body part. End game
                 if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
                     isGameOver = true;
+                    showRestartScreen();
 
-                    /* Reset game data. Idea maybe make a function with this 
-                    snake.x = 160;
-                    snake.y = 160;
-                    snake.cells = [];
-                    snake.maxCells = 4;
-                    snake.dx = grid;
-                    snake.dy = 0;
-                    playerScore.textContent = `Current Score: ${0}`;
-                    apple.x = getRandomInt(0, 25) * grid;
-                    apple.y = getRandomInt(0, 25) * grid;
-                    */
+
+
+                    //Reset game data. Idea maybe make a function with this 
+                    //snake.x = 160;
+                    //snake.y = 160;
+                    //snake.cells = [];
+                    //snake.maxCells = 4;
+                    //snake.dx = grid;
+                    //snake.dy = 0;
+                    //playerScore.textContent = `Current Score: ${0}`;
+                    //apple.x = getRandomInt(0, 25) * grid;
+                    //apple.y = getRandomInt(0, 25) * grid;
+                    
                 }
+
             }
         });
     }
 }
 
 // listen to keyboard events to move the snake
-document.addEventListener('keydown', function(e) {
-  // prevent snake from backtracking on itself by checking that it's
-  // not already moving on the same axis (pressing left while moving
-  // left won't do anything, and pressing right while moving left
-  // shouldn't let you collide with your own body)
+document.addEventListener('keydown', function (e) {
+    // prevent snake from backtracking on itself by checking that it's
+    // not already moving on the same axis (pressing left while moving
+    // left won't do anything, and pressing right while moving left
+    // shouldn't let you collide with your own body)
 
-  // left arrow key
-  if (e.which === 37 && snake.dx === 0) {
-    snake.dx = -grid;
-    snake.dy = 0;
-  }
-  // up arrow key
-  else if (e.which === 38 && snake.dy === 0) {
-    snake.dy = -grid;
-    snake.dx = 0;
-  }
-  // right arrow key
-  else if (e.which === 39 && snake.dx === 0) {
-    snake.dx = grid;
-    snake.dy = 0;
-  }
-  // down arrow key
-  else if (e.which === 40 && snake.dy === 0) {
-    snake.dy = grid;
-    snake.dx = 0;
-  }
+    // left arrow key
+    if (e.which === 37 && snake.dx === 0) {
+        snake.dx = -grid;
+        snake.dy = 0;
+    }
+    // up arrow key
+    else if (e.which === 38 && snake.dy === 0) {
+        snake.dy = -grid;
+        snake.dx = 0;
+    }
+    // right arrow key
+    else if (e.which === 39 && snake.dx === 0) {
+        snake.dx = grid;
+        snake.dy = 0;
+    }
+    // down arrow key
+    else if (e.which === 40 && snake.dy === 0) {
+        snake.dy = grid;
+        snake.dx = 0;
+    }
 });
 
 // start the game
 // when the player presses the spacebar, the loop begins
 document.body.onkeyup = function (e) {
-    if (e.keyCode == 32)
-    {
+    if (e.keyCode == 32) {
         requestAnimationFrame(loop);
     }
 }
