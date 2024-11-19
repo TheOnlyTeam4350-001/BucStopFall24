@@ -96,32 +96,33 @@ function controlAIPaddle() {
 }
 
 // Function to reset the game
+
 function resetGame() {
-    // Reset the ball and paddle positions
-    ball.x = canvas.width / 2 - grid / 2; // Adjust for grid size
-    ball.y = canvas.height / 2 - grid / 2; // Adjust for grid size
-    // Recenter the two paddles
+    ball.x = canvas.width / 2 - grid / 2;
+    ball.y = canvas.height / 2 - grid / 2;
     topPaddle.x = canvas.width / 2 - paddleWidth / 2;
     bottomPaddle.x = canvas.width / 2 - paddleWidth / 2;
-
-    // Reset the ball's velocity
+    ball.dx = ballSpeed;
     ball.dy = ballSpeed;
-    ball.dx = -ballSpeed;
+
     resetting = false;
 }
 
 // Function to end the game
 function endGame() {
     resetting = true;
+    gameState = 'end';
+
     // Clear the canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
+
     // Display the winner
     const winner = playerScore === 7 ? "Player" : "Computer";
     context.font = '36px Arial';
-    context.fillText(`${ winner } wins!`, canvas.width / 2, canvas.height / 2);
-    
-    // Stop the game loop
-    cancelAnimationFrame(loop);
+    context.textAlign = 'center';
+    context.fillStyle = 'black';
+    context.fillText(`${winner} wins!`, canvas.width / 2, canvas.height / 2 - 20);
+    context.fillText('Press R to Restart', canvas.width / 2, canvas.height / 2 + 20);
 }
 
 function showStartScreen() {
@@ -132,10 +133,15 @@ function showStartScreen() {
 
 // game loop
 function loop() {
-    
+
     requestAnimationFrame(loop);
     context.clearRect(0, 0, canvas.width, canvas.height);
+    // draw walls
+    context.fillStyle = 'black';
+    context.fillRect(0, 0, grid, canvas.height);
+    context.fillRect(canvas.width - grid, 0, canvas.width, canvas.height);
 
+    context.fillRect(ball.x, ball.y, ball.width, ball.height);
     // Control the AI paddle
     controlAIPaddle();
 
@@ -180,8 +186,7 @@ function loop() {
     // reset ball if computer scores
     if ((ball.y > canvas.height) && !resetting) {
         computerScore++;
-        if (computerScore !== 7)
-        {
+        if (computerScore !== 7) {
             resetting = true;
             setTimeout(function () {
                 resetGame();
@@ -201,8 +206,8 @@ function loop() {
 
     // Display the scores
     context.font = '24px Arial';
-    context.fillText(`Player: ${ playerScore }`, canvas.width - 325, 30);
-    context.fillText(`Computer: ${ computerScore }`, canvas.width - 100, 30);
+    context.fillText(`Player: ${playerScore}`, canvas.width - 325, 30);
+    context.fillText(`Computer: ${computerScore}`, canvas.width - 100, 30);
 
     // End the game if either player or computer reaches 7 points
     if (playerScore === 7 || computerScore === 7) {
@@ -225,15 +230,6 @@ function loop() {
         ball.y = bottomPaddle.y - ball.height;
     }
 
-    // draw ball
-    context.fillRect(ball.x, ball.y, ball.width, ball.height);
-
-    // draw walls
-    context.fillStyle = 'black';
-    context.fillRect(0, 0, grid, canvas.height);
-    context.fillRect(canvas.width - grid, 0, canvas.width, canvas.height);
-
-    
 }
 
 // listen to keyboard events to move the paddles
@@ -249,7 +245,19 @@ document.addEventListener('keydown', function (e) {
         bottomPaddle.dy = paddleSpeed;
     }
 });
-
+document.addEventListener('keyup', function (e) {
+    if (e.keyCode === 32 && gameState === 'start') { // Space key to start the game
+        gameState = 'play';
+        requestAnimationFrame(loop);
+    } else if (e.keyCode === 82 && gameState === 'end') { // R key to restart the game
+        playerScore = 0;
+        computerScore = 0;
+        resetting = false;
+        resetGame();
+        gameState = 'start';
+        showStartScreen();
+    }
+});
 // listen to keyboard events to stop the paddle if key is released
 document.addEventListener('keyup', function (e) {
     if (e.which === 37 || e.which === 39) {
