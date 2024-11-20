@@ -43,9 +43,3 @@ jobs:
             google-chrome --version
             chromedriver --version
             pwd
-
-      - name: Create test summary
-        uses: test-summary/action@dist
-        with:
-          paths: BucStop/Results.xml
-        if: always()
