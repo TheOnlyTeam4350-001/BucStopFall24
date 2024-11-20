@@ -1,0 +1,68 @@
+name: Regression Testing
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0'
+        
+      - name: Install curl
+        run: |
+          sudo apt-get update 
+          sudo apt-get install -y curl || echo "curl is already installed"
+
+      - name: Install Chrome
+        run: sudo apt-get install -y google-chrome-stable || echo "Chrome is already installed"
+
+      - name: Verify ChromeDriver version
+        run: chromedriver --version || echo "Using pre-installed ChromeDriver"
+    
+      - name: Verify ChromeDriver version
+        run: chromedriver --version  
+          
+      - name: Add Selenium Package
+        run: dotnet add ./BucStop/BucStop.csproj package Selenium.WebDriver
+        
+      - name: Restore dependencies
+        run: dotnet restore ./BucStop/BucStop.csproj
+      
+      - name: Set permissions (optional)
+        run: chmod +x ./BucStop/BucStop.csproj
+        
+      - name: Build
+        run: dotnet build ./BucStop/BucStop.csproj --configuration Release
+      
+      - name: Run Project
+        run: dotnet run --project ./BucStop/BucStop.csproj
+        
+      - name: Test project
+        run: dotnet test ./BucStop/BucStop.csproj --logger "junit;LogFilePath=BucStop/Results.xml"
+
+      - name: Debug Environment
+        run: |
+            ls -l
+            dotnet --version
+            google-chrome --version
+            chromedriver --version
+            pwd
+
+      - name: Create test summary
+        uses: test-summary/action@dist
+        with:
+          paths: BucStop/Results.xml
+        if: always()
