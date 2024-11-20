@@ -2,9 +2,9 @@ name: Regression Testing
 
 on:
   push:
-    branches: [ main ]
+    branches: [ Dev-Branch ]
   pull_request:
-    branches: [ main ]
+    branches: [ Dev-Branch ]
   workflow_dispatch:
 
 jobs:
@@ -21,23 +21,6 @@ jobs:
         with:
           dotnet-version: '6.0'
         
-      - name: Install curl
-        run: |
-          sudo apt-get update 
-          sudo apt-get install -y curl || echo "curl is already installed"
-
-      - name: Install Chrome
-        run: sudo apt-get install -y google-chrome-stable || echo "Chrome is already installed"
-
-      - name: Verify ChromeDriver version
-        run: chromedriver --version || echo "Using pre-installed ChromeDriver"
-    
-      - name: Verify ChromeDriver version
-        run: chromedriver --version  
-          
-      - name: Add Selenium Package
-        run: dotnet add ./BucStop/BucStop.csproj package Selenium.WebDriver
-        
       - name: Restore dependencies
         run: dotnet restore ./BucStop/BucStop.csproj
       
@@ -51,7 +34,7 @@ jobs:
         run: dotnet run --project ./BucStop/BucStop.csproj
         
       - name: Test project
-        run: dotnet test ./BucStop/BucStop.csproj --logger "junit;LogFilePath=BucStop/Results.xml"
+        run: dotnet test ./BucStop/BucStop.csproj
 
       - name: Debug Environment
         run: |
