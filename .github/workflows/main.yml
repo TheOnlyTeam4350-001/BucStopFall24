@@ -2,9 +2,9 @@ name: Regression Testing
 
 on:
   push:
-    branches: [ Dev-Branch ]
+    branches: [ main ]
   pull_request:
-    branches: [ Dev-Branch ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -43,9 +43,3 @@ jobs:
             google-chrome --version
             chromedriver --version
             pwd
-
-      - name: Create test summary
-        uses: test-summary/action@dist
-        with:
-          paths: BucStop/Results.xml
-        if: always()
