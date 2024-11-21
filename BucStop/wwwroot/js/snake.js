@@ -57,7 +57,7 @@ function showStartScreen() {
 function showRestartScreen() {
     context.font = '36px Arial';
     context.textAlign = 'center';
-    context.fillText('Press E to restart', canvas.width / 2, canvas.height / 2);
+    context.fillText('Press R to restart', canvas.width / 2, canvas.height / 2);
 
     snake.x = 160;
     snake.y = 160;
@@ -70,7 +70,7 @@ function showRestartScreen() {
     apple.y = getRandomInt(0, 25) * grid;
 
     document.body.onkeyup = function (e) {
-        if (e.keyCode == 69) {
+        if (e.keyCode == 82) {
             isGameOver = false;
             loop()
         }
