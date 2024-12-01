@@ -1,0 +1,60 @@
+DESIGN DOCUMENT FOR TETRIS 
+
+Goal: Get a restart button implemented into the Tetris game using the R key.
+
+Requirements: 
+	- Present a "Press R to Restart" text after the game ended.
+	- Tell if R has been press in order to restart game
+	- Reset game 
+		- Score
+		- canvas
+  		- Tetrominos
+		- Game loop
+	Obstacles:
+		- R should not be able to be pressed during the game  
+	
+Implementation
+	- showGameOver - One line was implemented to show the restart instructions
+		- context.fillText('| Press R to Restart |', canvas.width / 2, canvas.height / 1.9); 
+
+
+	- resetGame - New function implemented ( Resets the score, tetrominos, playfield, and calls the animation loop ) 
+	function resetGame() {
+   		 score = 0;
+    		 gameOver = false;
+
+    		// Reset the playfield (needed new playfield or old one would overlap)
+    		for (let row = -2; row < 20; row++) {
+        		playfield[row] = [];
+        		for (let col = 0; col < 10; col++) {
+            			playfield[row][col] = 0;
+        		}
+    		}
+
+    		// Reset tetromino seq
+    		tetrominoSequence.length = 0; 
+    		tetromino = getNextTetromino();
+
+    		// Reset score 
+    		const playerScore = document.getElementById("playerScore");
+    		playerScore.textContent = `Current Score: ${score}`;
+
+    		// Start the game loop
+    		rAF = requestAnimationFrame(loop);
+
+	- Event Listener Edited ( Added a listener for the R key so that it called the resetGame once it was pressed)
+		document.addEventListener('keydown', function (e) {
+    			if (gameOver && e.which === 82) { // 'R' key to restart
+        			resetGame();
+        			return;
+    			}
+
+Testing
+	- Games starts properly
+	- Game over message shows up properly
+ 	- Pressing R in the game over screen
+		- resets playfield 
+		- resets score to O
+		- new game with new tetromino sequence is displayed
+
+
