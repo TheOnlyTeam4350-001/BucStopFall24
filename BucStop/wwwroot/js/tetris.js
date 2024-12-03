@@ -163,8 +163,31 @@ function showGameOver() {
     context.textAlign = 'center';
     context.textBaseline = 'middle';
     context.fillText('GAME OVER! Score: ' + score, canvas.width / 2, canvas.height / 2);
+    context.fillText('| Press R to Restart |', canvas.width / 2, canvas.height / 1.9);
 }
+function resetGame() {
+    score = 0;
+    gameOver = false;
 
+    // Reset the playfield (needed new playfield or old one would overlap)
+    for (let row = -2; row < 20; row++) {
+        playfield[row] = [];
+        for (let col = 0; col < 10; col++) {
+            playfield[row][col] = 0;
+        }
+    }
+
+    // Reset tetromino seq
+    tetrominoSequence.length = 0;
+    tetromino = getNextTetromino();
+
+    // Reset score 
+    const playerScore = document.getElementById("playerScore");
+    playerScore.textContent = `Current Score: ${score}`;
+
+    // Start the game loop
+    rAF = requestAnimationFrame(loop);
+}
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
 const grid = 32;
@@ -175,7 +198,7 @@ const tetrominoSequence = [];
 const playfield = [];
 
 // populate the empty state
-for (let row = -2; row < 20; row++) {
+for (let row = 0; row < 20; row++) {
     playfield[row] = [];
 
     for (let col = 0; col < 10; col++) {
@@ -288,7 +311,10 @@ function loop() {
 
 // listen to keyboard events to move the active tetromino
 document.addEventListener('keydown', function (e) {
-    if (gameOver) return;
+    if (gameOver && e.which === 82) { // 'R' key to restart
+        resetGame();
+        return;
+    }
 
     // left and right arrow keys (move)
     if (e.which === 37 || e.which === 39) {

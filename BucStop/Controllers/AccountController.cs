@@ -35,7 +35,7 @@ namespace BucStop.Controllers
                 // Sign in the user
                 await HttpContext.SignInAsync("CustomAuthenticationScheme", userPrincipal);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Games");
             }
             else
             {

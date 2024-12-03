@@ -4,6 +4,10 @@
 <!-- This file is the generic layout, used by all pages on the site-->
 <!-- You can think of it as the template for everything else-->
 
+@using BucStop.Services;
+@using Microsoft.AspNetCore.Hosting
+
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -44,6 +48,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="GameCriteria">Add Your Game!</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="PatchNotes">Patch Notes</a>
+                        </li>
 
                     </ul>
                     <partial name="_LoginPartial"></partial>
@@ -60,7 +67,7 @@
     <!-- This block handles the footer, which includes the version number for the project. -->
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - BucStop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - <a href="https://github.com/chrisseals98/BOBBY/releases/tag/v2.0.0" style="color:#C6AA76;">Version: 2.0.0</a><a> - </a>
+            &copy; <script>document.write(new Date().getFullYear())</script> - BucStop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - <a href="https://github.com/TheOnlyTeam4350-001" style="color:#C6AA76;">Version: 3.0.5</a><a> - Current Visit Count: @(Context.Items["VisitCount"] ?? 0)</a>
 
         </div>
     </footer>

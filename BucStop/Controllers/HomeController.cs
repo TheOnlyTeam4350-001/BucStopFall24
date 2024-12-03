@@ -1,5 +1,7 @@
 ﻿using BucStop.Models;
+using BucStop.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System.Diagnostics;
 
 /*
@@ -11,19 +13,46 @@ namespace BucStop.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
         private readonly ILogger<HomeController> _logger;
         private readonly GameService _gameService;
+        private readonly VisitCountService _visitCountService;
+        private readonly VisitCountManager _visitCountManager;
 
-        public HomeController(ILogger<HomeController> logger, GameService games)
+        public HomeController(ILogger<HomeController> logger, GameService gameService, VisitCountManager visitCountManager)
         {
             _logger = logger;
-            _gameService = games;
+            _gameService = gameService;
+
+            _visitCountManager = visitCountManager;
         }
 
         //Sends the user to the deprecated Index page.
         public IActionResult Index()
         {
-            return View(_gameService.GetGames());
+            // Retrieve the updated visit count
+            int currentVisitCount = _visitCountManager.GetVisitCounts();
+
+            // Pass the updated visit count to the view
+            ViewData["VisitCount"] = currentVisitCount;
+
+            // Fetch and pass game data
+            var games = _gameService.GetGames();
+            return View(games);
+        }
+
+        // Sends the user to the PatchNotes webpage
+        public IActionResult PatchNotes()
+        {
+            return View();
+        }
+
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            // Load the visit count
+            ViewData["VisitCount"] = _visitCountManager.GetVisitCounts();
+            base.OnActionExecuting(context);
         }
 
         //Takes the user to the admin page.
@@ -61,6 +90,11 @@ namespace BucStop.Controllers
         }
 
         public IActionResult TwoDotFour()
+        {
+            return View();
+        }
+
+        public IActionResult ThreeDotZero()
         {
             return View();
         }
