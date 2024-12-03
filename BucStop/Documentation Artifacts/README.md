@@ -63,4 +63,8 @@ For more documentation on how to run locally and how to set up deployments, see 
 * [Running Locally](https://docs.google.com/document/d/1gfUpjZNfqWyv1ohUW1IaS8fOhXp0hOx6tFQVXBADa8Q/edit?usp=sharing)
 * [How to Deploy](https://docs.google.com/document/d/1VElVP9HrOafxdM0HfD9jjM8HvnzBSpXhhq1O9VtTTug/edit?usp=sharing)
 
+### Fall 2024 Video Playlist
+* [Generic Deployment](https://youtu.be/mM0eBJ7yaYU?si=86NLA3WyHIzv_-ny)
+* [GitHub Actions Testing](https://youtu.be/qbKTXmtj7zc?si=hbHZLiWFqBlya8qs)
+* [BucStop Additions](https://youtu.be/7e_GbIQLHg8?si=-TeMAlG_i7IrbwLQ)
 
