@@ -42,6 +42,12 @@ namespace BucStop.Controllers
             return View(games);
         }
 
+        // Sends the user to the PatchNotes webpage
+        public IActionResult PatchNotes()
+        {
+            return View();
+        }
+
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             // Load the visit count
@@ -84,6 +90,11 @@ namespace BucStop.Controllers
         }
 
         public IActionResult TwoDotFour()
+        {
+            return View();
+        }
+
+        public IActionResult ThreeDotZero()
         {
             return View();
         }
